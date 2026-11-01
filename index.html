@@ -960,9 +960,9 @@ function screenSubject(sk){
  const rows=S.cats.map(c=>{const key=sk+'.'+c.k,d=p.diff[key]||1;
   return `<div class="catrow"><div class="caticon">${c.i}</div><div class="catinfo"><b>${c.n}</b>
   ${c.practice?'':`<div class="diffs">${[1,2,3].map(i=>`<button class="pill ${d===i?'on':''}" data-act="setDiff" data-s="${sk}" data-k="${key}" data-d="${i}">${'★'.repeat(i)} ${DLBL[i-1]}</button>`).join('')}</div>`}
-  <small class="ddesc">${c.practice?c.dd.join('<br>'):c.dd[d-1]}</small></div><button class="btn" data-act="startCat" data-s="${sk}" data-c="${c.k}">${c.practice?'れんしゅう ▶':'スタート ▶'}</button></div>`;}).join('');
+  <small class="ddesc">${c.practice?c.dd.join('<br>'):c.dd[d-1]}</small></div>${p.last===key?`<button class="btn sub" data-act="lockedCat" style="opacity:.55">つぎは ほかの！</button>`:`<button class="btn" data-act="startCat" data-s="${sk}" data-c="${c.k}">${c.practice?'れんしゅう ▶':'スタート ▶'}</button>`}</div>`;}).join('');
  show(`<div class="top">${backBtn('home')}<h2>${S.i} ${S.n}</h2>${coinPill(p)}</div>
- <p style="margin:0 0 10px;font-weight:800">やりたい もんだいと むずかしさを えらんでね！（せいかい 1もん：★かんたん 1コイン／★★ 2コイン／★★★ 3コイン）</p>${rows}`,p.type);}
+ <p style="margin:0 0 10px;font-weight:800">おなじ べんきょうは つづけて できないよ。やりたい もんだいと むずかしさを えらんでね！（せいかい 1もん：★かんたん 1コイン／★★ 2コイン／★★★ 3コイン）</p>${rows}`,p.type);}
 
 /* ----- クイズ ----- */
 let Q=null;
@@ -1007,7 +1007,7 @@ function showResult(title,st,coins,extra,againAttr,sk){
  <h2 style="font-size:32px;margin:6px 0">${msg}</h2><div style="font-size:24px;font-weight:900">${title}</div>
  <div class="reward">🪙 +${coins} コイン ゲット！</div>${extra?`<div style="font-weight:900;color:#ff5c9a">${extra}</div>`:''}
  <div style="margin:8px 0 16px;font-weight:800">いまの コイン：🪙 ${p.coins}</div>
- <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap"><button class="btn" data-act="${againAttr}">🔁 もういちど</button>
+ <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap"><button class="btn" data-act="${againAttr}" style="display:none">🔁 もういちど</button>
  <button class="btn sub" data-act="subject" data-s="${sk}">◀ もんだい えらび</button>
  <button class="btn gold" data-act="gacha">🎰 ガチャへ</button></div></div>`,p.type);
  if(coins>0)SFX.coin();if(st===3)confetti(60);}
@@ -1169,7 +1169,10 @@ const ACT={
  subject(el){closeReveal();screenSubject(el.dataset.s);},
  subjectPuzzle(){screenSubject('puzzle');},
  setDiff(el){const p=cur();p.diff[el.dataset.k]=+el.dataset.d;save();SFX.tap();const y=window.scrollY;screenSubject(el.dataset.s);window.scrollTo(0,y);},
+ lockedCat(){toast('さっきと おなじ べんきょうは つづけて できないよ。ほかの べんきょうを えらんでね！');},
  startCat(el){closeReveal();const s=el.dataset.s,c=el.dataset.c;const p=cur();const d=p.diff[s+'.'+c]||1;
+  if(p.last===s+'.'+c){toast('さっきと おなじ べんきょうは つづけて できないよ。ほかの べんきょうを えらんでね！');return screenSubject(s);}
+  p.last=s+'.'+c;save();
   if(c==='write')return screenWrite();if(c==='memory')return startMemory(d);if(c==='slide')return startSlide(d);startQuiz(s,c);},
  answer(el){answer(+el.dataset.i);},
  nextQ(){nextQ();},
