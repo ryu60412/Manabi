@@ -393,6 +393,13 @@ const CAR_ITEMS=[
  {id:'ct2',cat:'type',name:'スポーツカー',r:1,shape:'sports'},
  {id:'ct6',cat:'type',name:'レーシングカー',r:2,shape:'racing'},
  {id:'ct7',cat:'type',name:'モンスタートラック',r:2,shape:'monster'},
+ {id:'ct8',cat:'type',name:'ダンプカー',r:0,shape:'dump'},
+ {id:'ct9',cat:'type',name:'しょうぼうしゃ',r:1,shape:'fire'},
+ {id:'ct10',cat:'type',name:'きゅうきゅうしゃ',r:1,shape:'amb'},
+ {id:'ct11',cat:'type',name:'ミキサーしゃ',r:1,shape:'mixer'},
+ {id:'ct12',cat:'type',name:'ごみしゅうしゅうしゃ',r:1,shape:'garbage'},
+ {id:'ct13',cat:'type',name:'クレーンしゃ',r:2,shape:'crane'},
+ {id:'ct14',cat:'type',name:'ショベルカー',r:2,shape:'shovel'},
  {id:'cb1',cat:'body',name:'レッド',r:0,c:'#e63946',def:1},
  {id:'cb2',cat:'body',name:'ブルー',r:0,c:'#1d70f5'},
  {id:'cb3',cat:'body',name:'イエロー',r:0,c:'#ffc300'},
@@ -582,6 +589,13 @@ const CARS={
  pickup:{body:'M24 130 L24 86 L160 86 L164 54 L222 54 L246 84 L278 90 Q288 94 288 106 L288 130 Z',win:'M170 84 L172 60 L218 60 L238 84 Z',wh:[72,236],r:21,wing:[28,86],roof:[194,54],front:[282,100],rear:[28,98],door:[200,102]},
  van:{body:'M26 130 L26 46 Q26 34 40 34 L236 34 Q256 36 266 62 L280 90 Q288 96 286 108 L286 130 Z',win:'M44 44 L88 44 L88 72 L44 72 Z M96 44 L140 44 L140 72 L96 72 Z M148 44 L192 44 L192 72 L148 72 Z M200 44 L236 44 Q250 46 258 72 L200 72 Z',wh:[76,232],r:21,wing:[34,36],roof:[140,34],front:[280,100],rear:[30,96],door:[150,100]},
  racing:{body:'M12 130 L16 112 L110 104 L132 84 L168 84 L186 104 L272 110 Q294 114 292 130 Z',win:'M138 102 L146 89 L162 89 L172 102 Z',wh:[64,238],r:22,wing:[22,112],roof:[150,84],front:[286,120],rear:[18,120],door:[150,116]},
+ dump:{body:'M20 130 L20 66 L30 52 L160 52 L166 70 L176 70 L180 60Q182 52 192 52L238 52L260 80L282 86Q288 90 288 104L288 130Z',win:'M190 78L192 60L230 60L246 78Z',wh:[56,108,236],r:20,wing:[24,52],roof:[214,52],front:[282,98],rear:[24,100],door:[96,100]},
+ fire:{body:'M22 130L22 76Q22 70 28 70L180 70L184 58Q186 48 196 48L238 48L262 76L282 82Q288 86 288 100L288 130Z',win:'M198 70L200 54L234 54L252 70Z',wh:[60,118,236],r:20,wing:[30,70],roof:[216,48],front:[282,96],rear:[26,100],door:[100,100]},
+ amb:{body:'M24 130L24 52Q24 42 36 42L204 42Q220 42 230 54L254 82L278 88Q288 92 288 106L288 130Z',win:'M208 48L222 48Q232 52 240 68L208 68Z',wh:[80,232],r:21,wing:[32,44],roof:[120,42],front:[282,100],rear:[28,96],door:[120,92]},
+ mixer:{body:'M20 130L20 118L172 118L176 64Q178 54 188 54L238 54L260 82L282 88Q288 92 288 106L288 130Z',win:'M190 80L192 62L232 62L248 80Z',wh:[56,108,236],r:20,wing:[24,112],roof:[214,54],front:[282,100],rear:[24,112],door:[210,106]},
+ garbage:{body:'M20 130L20 68Q20 48 42 48L160 48Q180 48 182 66L184 62Q188 54 200 54L238 54L262 80L282 86Q288 90 288 104L288 130Z',win:'M200 80L202 62L234 62L250 80Z',wh:[52,108,236],r:20,wing:[24,48],roof:[214,54],front:[282,98],rear:[24,100],door:[100,104]},
+ crane:{body:'M16 130L16 100L168 100L172 62Q174 54 184 54L234 54L258 82L282 88Q288 92 288 106L288 130Z',win:'M188 82L190 62L230 62L246 82Z',wh:[50,100,236],r:20,wing:[22,100],roof:[210,54],front:[282,100],rear:[20,112],door:[140,114]},
+ shovel:{body:'M44 114L44 66Q44 56 54 56L62 56L74 36L124 36Q134 36 134 46L134 114Z',win:'M82 56L84 42L124 42L124 64L82 64Z',wh:[],r:20,track:1,wing:[48,56],roof:[104,36],front:[134,84],rear:[46,100],door:[100,92]},
  monster:{body:'M24 130 L24 86 L160 86 L164 54 L222 54 L246 84 L278 90 Q288 94 288 106 L288 130 Z',win:'M170 84 L172 60 L218 60 L238 84 Z',wh:[78,230],r:34,lift:26,wing:[28,86],roof:[194,54],front:[282,100],rear:[28,98],door:[200,102]},
 };
 function wheelSVG(t,x,cy,r,anim){
@@ -610,6 +624,18 @@ function carAccSVG(a,T){const[rx,ry]=T.roof;switch(a.shape){
  case 'lightbar':{let s=`<rect x="${rx-30}" y="${ry-8}" width="60" height="8" rx="3" fill="#222"/>`;for(let i=0;i<5;i++)s+=`<circle cx="${rx-24+i*12}" cy="${ry-4}" r="3.2" fill="#fff36b"/>`;return s;}
  case 'fin':return `<path d="M${rx-18} ${ry+1} Q${rx-2} ${ry-8} ${rx+4} ${ry-30} Q${rx+8} ${ry-12} ${rx+18} ${ry+1} Z" fill="${a.c}" stroke="#0004" stroke-width="1.5"/>`;
  }return '';}
+const CARX={
+ dump:(T,B,f)=>{let g='';for(let x=48;x<=150;x+=20)g+=`<path d="M${x} 58V108" stroke="#0003" stroke-width="2.5"/>`;return g+`<rect x="24" y="50" width="140" height="7" rx="3" fill="#0003"/><path d="M134 114L112 92" stroke="#c9ced6" stroke-width="7" stroke-linecap="round"/><rect x="20" y="118" width="64" height="6" fill="#ffd23f"/><path d="M26 118L36 124M38 118L48 124M50 118L60 124M62 118L72 124" stroke="#222" stroke-width="3"/>`;},
+ fire:(T,B,f)=>{let g='';for(let i=0;i<=9;i++){const t=i/9,x=34+144*t;g+=`<path d="M${x.toFixed(1)} ${(64-12*t).toFixed(1)}V${(58-12*t).toFixed(1)}" stroke="#e8ecef" stroke-width="2.5"/>`;}
+  return `<path d="M34 64L178 52M34 58L178 46" stroke="#e8ecef" stroke-width="3.5" stroke-linecap="round"/><path d="M34 64L178 52M34 58L178 46" stroke="#0004" stroke-width=".8"/>`+g+`<rect x="22" y="110" width="160" height="6" fill="#ffd23f"/><text x="100" y="98" text-anchor="middle" font-size="22" font-weight="900" fill="#fff" font-family="Arial">119</text><rect x="204" y="42" width="30" height="6" rx="2" fill="#333"/><circle cx="212" cy="40" r="5" fill="#ff2a2a"><animate attributeName="opacity" values="1;.3;1" dur=".6s" repeatCount="indefinite"/></circle><circle cx="226" cy="40" r="5" fill="#2a7bff"><animate attributeName="opacity" values=".3;1;.3" dur=".6s" repeatCount="indefinite"/></circle>`;},
+ amb:(T,B,f)=>`<rect x="24" y="108" width="196" height="6" fill="#e63946"/><circle cx="116" cy="80" r="19" fill="#fff" stroke="#0003" stroke-width="1.5"/><path d="M116 67V93M103 80H129" stroke="#e63946" stroke-width="10"/><path d="M170 50V104" stroke="#0003" stroke-width="2"/><rect x="164" y="34" width="36" height="8" rx="3" fill="#333"/><circle cx="174" cy="33" r="6" fill="#ff2a2a"><animate attributeName="opacity" values="1;.3;1" dur=".6s" repeatCount="indefinite"/></circle><circle cx="190" cy="33" r="6" fill="#2a7bff"><animate attributeName="opacity" values=".3;1;.3" dur=".6s" repeatCount="indefinite"/></circle>`,
+ mixer:(T,B,f)=>{let g=`<path d="M24 112Q12 86 34 70L146 54Q176 58 176 84Q176 108 140 114Z" fill="${f}" stroke="#00000066" stroke-width="2.2"/>`;for(let i=0;i<5;i++)g+=`<path d="M${50+i*24} 108L${66+i*24} 62" stroke="#ffffff99" stroke-width="5"/>`;
+  return g+`<ellipse cx="164" cy="84" rx="12" ry="26" fill="#0003"/><circle cx="166" cy="84" r="6" fill="#999"/><path d="M26 82L8 104L22 108" stroke="#777" stroke-width="7" fill="none" stroke-linecap="round" stroke-linejoin="round"/><path d="M60 114L84 120" stroke="#555" stroke-width="5"/>`;},
+ garbage:(T,B,f)=>`<path d="M44 52Q92 36 140 52" stroke="#0003" stroke-width="3" fill="none"/><rect x="20" y="92" width="20" height="38" rx="3" fill="#333"/><rect x="24" y="100" width="12" height="4" fill="#ffd23f"/><circle cx="96" cy="86" r="22" fill="#fff" stroke="#0003" stroke-width="1.5"/><circle cx="96" cy="86" r="12" fill="none" stroke="#22b357" stroke-width="5" stroke-dasharray="19 6"/><path d="M107 76L113 86L102 86Z" fill="#22b357"/><rect x="60" y="116" width="100" height="5" fill="#22b357"/>`,
+ crane:(T,B,f)=>`<rect x="86" y="80" width="64" height="20" rx="4" fill="${f}" stroke="#00000066" stroke-width="2"/><rect x="154" y="72" width="16" height="28" rx="3" fill="#555"/><path d="M104 88L122 76L44 6L26 18Z" fill="#f2b705" stroke="#0006" stroke-width="2.2" stroke-linejoin="round"/><path d="M50 22L70 40M66 34L86 52M82 46L100 62" stroke="#0004" stroke-width="2"/><path d="M34 12V66" stroke="#222" stroke-width="2.5"/><path d="M34 66Q26 72 31 80Q39 82 38 74" stroke="#222" stroke-width="3" fill="none"/><path d="M14 100L14 124M170 100L170 124" stroke="#666" stroke-width="6"/><rect x="6" y="122" width="16" height="5" rx="2" fill="#444"/><rect x="162" y="122" width="16" height="5" rx="2" fill="#444"/>`,
+ shovel:(T,B,f)=>`<path d="M126 94L142 78L214 18L232 32L156 102Z" fill="#f2b705" stroke="#0006" stroke-width="2.2" stroke-linejoin="round"/><path d="M142 98L188 56" stroke="#c9ced6" stroke-width="6" stroke-linecap="round"/><path d="M208 24L226 36L276 98L258 108Z" fill="#f2b705" stroke="#0006" stroke-width="2.2" stroke-linejoin="round"/><path d="M204 24L238 82" stroke="#c9ced6" stroke-width="5" stroke-linecap="round"/><path d="M256 100L284 90Q294 100 288 114L262 118Z" fill="#6b727c" stroke="#0006" stroke-width="2.2" stroke-linejoin="round"/><path d="M286 104L296 108M282 112L292 118" stroke="#6b727c" stroke-width="4" stroke-linecap="round"/><rect x="40" y="96" width="10" height="16" fill="#0003"/>`
+};
+function trackSVG(an){return `<rect x="26" y="112" width="236" height="36" rx="18" fill="#2b2b30" stroke="#0006" stroke-width="2"/><rect x="31" y="117" width="226" height="26" rx="13" fill="none" stroke="#666" stroke-width="3.5" stroke-dasharray="7 5">${an?'<animate attributeName="stroke-dashoffset" from="0" to="-24" dur=".5s" repeatCount="indefinite"/>':''}</rect>`+[48,98,148,198,246].map((x,i)=>`<circle cx="${x}" cy="130" r="${i%4?9:12}" fill="#8a8f98" stroke="#222" stroke-width="2"/><circle cx="${x}" cy="130" r="3" fill="#333"/>`).join('');}
 function bodyDeco(B,T){const c2=B.c2;switch(B.pat){
  case 'race':return `<rect x="0" y="${T.door[1]-6}" width="300" height="7" fill="${c2}"/><rect x="0" y="${T.door[1]+5}" width="300" height="4" fill="${c2}"/>`;
  case 'flame':{const y=T.door[1];return `<path d="M300 ${y-14} L230 ${y-14} Q200 ${y-30} 180 ${y-8} Q170 ${y-22} 150 ${y} Q170 ${y+4} 182 ${y+14} Q200 ${y+30} 230 ${y+20} L300 ${y+20} Z" fill="${c2}"/><path d="M300 ${y-6} L236 ${y-6} Q214 ${y-16} 200 ${y+2} Q214 ${y+16} 236 ${y+12} L300 ${y+12} Z" fill="#ffd23f"/>`;}
@@ -632,6 +658,7 @@ function renderCar(eq,opt={}){
  g+=`<g clip-path="url(#${cid})">${bodyDeco(B,T)}${T.wh.map(x=>`<circle cx="${x}" cy="${130+(T.lift||0)}" r="${r+5}" fill="#00000066"/>`).join('')}<rect x="0" y="0" width="300" height="${T.roof[1]+12}" fill="#ffffff22"/></g>`;
  g+=`<path d="${T.body}" fill="none" stroke="#00000066" stroke-width="2.2" stroke-linejoin="round"/>`;
  g+=`<path d="${T.win}" fill="#bfe6ff" stroke="#00000055" stroke-width="2"/>`;
+ if(CARX[typeIt.shape])g+=CARX[typeIt.shape](T,B,fill);
  g+=`<circle cx="${T.front[0]}" cy="${T.front[1]}" r="6" fill="#fff8b0" stroke="#0004"/><rect x="${T.rear[0]-4}" y="${T.rear[1]-5}" width="8" height="10" rx="2" fill="#ff3b3b"/>`;
  g+=`<rect x="${T.door[0]-26}" y="${T.door[1]-14}" width="10" height="3" rx="1.5" fill="#00000055"/>`;
  if(W&&W.shape==='jet')g+=wingSVG(W,T.rear[0],T.rear[1]-6);
@@ -639,6 +666,7 @@ function renderCar(eq,opt={}){
  if(A&&A.shape==='exhaust')g=`<path d="M${T.rear[0]-2} 124 Q${T.rear[0]-30} 116 ${T.rear[0]-44} 124 Q${T.rear[0]-30} 132 ${T.rear[0]-2} 128 Z" fill="#ff6a00"><animate attributeName="opacity" values="1;.4;1" dur=".2s" repeatCount="indefinite"/></path><path d="M${T.rear[0]-2} 125 Q${T.rear[0]-20} 122 ${T.rear[0]-28} 126 Q${T.rear[0]-20} 129 ${T.rear[0]-2} 127 Z" fill="#ffe14d"/><rect x="${T.rear[0]-4}" y="122" width="10" height="8" rx="2" fill="#888"/>`+g;
  s+=`<g transform="translate(0 ${dy})">${g}</g>`;
  s+=T.wh.map(x=>wheelSVG(TR,x,cy,r,opt.anim)).join('');
+ if(T.track)s+=trackSVG(opt.anim);
  return `<svg viewBox="${opt.vb||'-30 -24 340 184'}" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet"><defs>${defs.join('')}</defs>${s}</svg>`;}
 
 function renderAvatar(p,override,vb,anim){
@@ -818,6 +846,8 @@ const FLG=(()=>{
  const V=cs=>{const w=90/cs.length;return cs.map((c,i)=>`<rect x="${(i*w).toFixed(2)}" y="0" width="${(w+.3).toFixed(2)}" height="60" fill="${c}"/>`).join('');};
  const S=(cx,cy,R,f,rot,pts,k)=>`<path d="${starPath(cx,cy,R,R*(k||.382),pts||5)}" fill="${f}"${rot?` transform="rotate(${rot} ${cx} ${cy})"`:''}/>`;
  const nord=(b,c1,w1,c2,w2)=>`${bg(b)}<path d="M32 0V60M0 30H90" stroke="${c1}" stroke-width="${w1}"/>${c2?`<path d="M32 0V60M0 30H90" stroke="${c2}" stroke-width="${w2}"/>`:''}`;
+const UJ=`<clipPath id="ujs"><path d="M0 0v30h60V0z"/></clipPath><clipPath id="ujt"><path d="M30 15h30v15zv15h-30zh-30v-15zv-15h30z"/></clipPath><g clip-path="url(#ujs)"><path d="M0 0v30h60V0z" fill="#012169"/><path d="M0 0L60 30M60 0L0 30" stroke="#fff" stroke-width="6"/><path d="M0 0L60 30M60 0L0 30" clip-path="url(#ujt)" stroke="#C8102E" stroke-width="4"/><path d="M30 0v30M0 15h60" stroke="#fff" stroke-width="10"/><path d="M30 0v30M0 15h60" stroke="#C8102E" stroke-width="6"/></g>`;
+ const dots=(n,cx,cy,R,skip)=>Array.from({length:n},(_,i)=>{const r=Math.sqrt((i+.5)/n)*R,a=i*2.39996;return [cx+r*Math.cos(a),cy+r*Math.sin(a)];}).filter(skip||(()=>true)).map(([x,y])=>`<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r=".7" fill="#fff"/>`).join('');
  const JACK=`${bg('#012169')}<path d="M0 0L90 60M90 0L0 60" stroke="#fff" stroke-width="10"/><path d="M0 0L90 60M90 0L0 60" stroke="#c8102e" stroke-width="3.5"/><path d="M45 0V60M0 30H90" stroke="#fff" stroke-width="16"/><path d="M45 0V60M0 30H90" stroke="#c8102e" stroke-width="9"/>`;
  const tri=(x,y,rot,fl)=>`<g transform="translate(${x} ${y}) rotate(${rot})" fill="#000">`+fl.map((s,i)=>{const yy=(i-1)*3.8-1.1;return s?`<rect x="-7" y="${yy}" width="14" height="2.2"/>`:`<rect x="-7" y="${yy}" width="5.6" height="2.2"/><rect x="1.4" y="${yy}" width="5.6" height="2.2"/>`;}).join('')+`</g>`;
  const LR=[[8,20],[14,15],[13,36],[30,26],[27,46],[48,50],[38,62],[44,80],[9,68],[3,70],[3,100]];
@@ -827,17 +857,17 @@ const FLG=(()=>{
   us:()=>{let s='';for(let i=0;i<13;i++)s+=`<rect x="0" y="${(i*60/13).toFixed(2)}" width="90" height="${(60/13+.3).toFixed(2)}" fill="${i%2?'#fff':'#b22234'}"/>`;
    s+=`<rect width="36" height="${(60*7/13).toFixed(2)}" fill="#3c3b6e"/>`;
    for(let r=0;r<9;r++){const n=r%2?5:6;for(let c=0;c<n;c++)s+=S((r%2?6:3)+6*c,3.23*(r+1),1.5,'#fff');}return s;},
-  gb:()=>JACK,
+  gb:()=>`<g transform="translate(0 7.5) scale(1.5)">${UJ}</g>`,
   fr:()=>V(['#0055a4','#fff','#ef4135']),
   de:()=>H(['#000','#dd0000','#ffce00']),
   it:()=>V(['#009246','#fff','#ce2b37']),
   cn:()=>{let s=bg('#de2910')+S(15,15,9,'#ffde00');[[30,6],[36,12],[36,21],[30,27]].forEach(([x,y])=>{s+=S(x,y,3,'#ffde00',Math.atan2(15-y,15-x)*180/Math.PI+90);});return s;},
   kr:()=>bg('#fff')+`<circle cx="45" cy="30" r="12" fill="#0047a0"/><path d="M33 30A12 12 0 0 1 57 30A6 6 0 0 1 45 30A6 6 0 0 0 33 30Z" fill="#cd2e3a"/>`+tri(20,13,-56.3,[1,1,1])+tri(70,13,56.3,[0,1,0])+tri(20,47,56.3,[1,0,1])+tri(70,47,-56.3,[0,0,0]),
   ca:()=>bg('#fff')+`<rect width="22.5" height="60" fill="#d52b1e"/><rect x="67.5" width="22.5" height="60" fill="#d52b1e"/><path transform="translate(45 12) scale(.36)" d="${LEAF}" fill="#d52b1e"/>`,
-  br:()=>bg('#009739')+`<path d="M45 6L83 30L45 54L7 30Z" fill="#fedd00"/><circle cx="45" cy="30" r="14" fill="#012169"/><path d="M31.5 28Q45 22.5 58.5 32" stroke="#fff" stroke-width="3" fill="none"/>`,
+  br:()=>bg('#009739')+`<path d="M45 6L83 30L45 54L7 30Z" fill="#fedd00"/><circle cx="45" cy="30" r="14.5" fill="#002776"/>`+dots(27,45,30,13,([x,y])=>Math.abs(y-(31-Math.sin((x-45)/13*1.2)*0))>3.6)+`<path d="M31 30Q45 21.5 59 33" stroke="#fff" stroke-width="3.2" fill="none"/><path d="M31.4 29.6Q45 22 58.6 32.6" stroke="#002776" stroke-width=".9" fill="none" stroke-dasharray="1.2 1"/>`,
   in:()=>H(['#ff9933','#fff','#138808'])+`<circle cx="45" cy="30" r="7" fill="none" stroke="#000080" stroke-width="1"/>`+Array.from({length:24},(_,i)=>{const a=i*Math.PI/12;return `<path d="M45 30L${(45+7*Math.cos(a)).toFixed(2)} ${(30+7*Math.sin(a)).toFixed(2)}" stroke="#000080" stroke-width=".5"/>`;}).join('')+`<circle cx="45" cy="30" r="1.2" fill="#000080"/>`,
-  es:()=>H(['#aa151b','#f1bf00','#aa151b'],[1,2,1]),
-  au:()=>bg('#012169')+`<g transform="scale(.5)">${JACK}</g>`+S(22.5,45,8,'#fff',0,7,.45)+S(67,9,3.6,'#fff',0,7,.45)+S(55,27,3.6,'#fff',0,7,.45)+S(79,23,3.6,'#fff',0,7,.45)+S(67,50,3.6,'#fff',0,7,.45)+S(73,34,2,'#fff'),
+  es:()=>H(['#aa151b','#f1bf00','#aa151b'],[1,2,1])+`<clipPath id="spsh"><path d="M25 24H35V34C35 38 32 40 30 41C28 40 25 38 25 34Z"/></clipPath><g clip-path="url(#spsh)"><rect x="25" y="24" width="5" height="6.5" fill="#c8102e"/><rect x="30" y="24" width="5" height="6.5" fill="#eee"/><rect x="25" y="30.5" width="5" height="6" fill="#f1bf00"/><rect x="30" y="30.5" width="5" height="6" fill="#c8102e"/><rect x="25" y="36.5" width="10" height="6" fill="#eee"/></g><rect x="26.2" y="25.6" width="2.6" height="2.6" fill="#f1bf00"/><path d="M31.5 25.5L33.6 25.5L33.6 28.5L31.5 28.5Z" fill="#7b3f98"/><path d="M25.5 31.5H29.5M25.5 33H29.5M25.5 34.5H29.5" stroke="#c8102e" stroke-width=".7"/><path d="M30.6 32L34.4 35.4M34.4 32L30.6 35.4" stroke="#f1bf00" stroke-width=".7"/><circle cx="30" cy="39" r="1.2" fill="#c8102e"/><ellipse cx="30" cy="30.5" rx="1.7" ry="2.1" fill="#0039a6" stroke="#fff" stroke-width=".4"/><path d="M25 24H35V34C35 38 32 40 30 41C28 40 25 38 25 34Z" fill="none" stroke="#7a5d00" stroke-width=".5"/><path d="M24.2 24.2L24.2 21.2L26.7 22.7L28.4 19.8L30 22.2L31.6 19.8L33.3 22.7L35.8 21.2L35.8 24.2Z" fill="#f1bf00" stroke="#7a5d00" stroke-width=".4"/><rect x="20.4" y="25.5" width="2.6" height="15" fill="#eee" stroke="#999" stroke-width=".3"/><rect x="37" y="25.5" width="2.6" height="15" fill="#eee" stroke="#999" stroke-width=".3"/><path d="M19.8 24.6h3.8v1.4h-3.8zM36.4 24.6h3.8v1.4h-3.8zM19.8 40.6h3.8v1.4h-3.8zM36.4 40.6h3.8v1.4h-3.8z" fill="#f1bf00"/><path d="M20.4 29L23 31.5V33.5L20.4 31ZM37 31.5L39.6 29V31L37 33.5Z" fill="#c8102e"/>`,
+  au:()=>`<rect y="7.5" width="90" height="45" fill="#012169"/><g transform="translate(0 7.5) scale(.75)">${UJ}</g>`+S(22.5,41,8.2,'#fff',0,7,.42)+S(67,14.3,3.5,'#fff',0,7,.42)+S(55.5,27.8,3.5,'#fff',0,7,.42)+S(79,24.8,3.5,'#fff',0,7,.42)+S(67,45,3.5,'#fff',0,7,.42)+S(74,33.3,2,'#fff'),
   ru:()=>H(['#fff','#0039a6','#d52b1e']),
   nl:()=>H(['#ae1c28','#fff','#21468b']),
   ch:()=>`<rect x="15" width="60" height="60" fill="#d52b1e"/><path d="M45 12V48M27 30H63" stroke="#fff" stroke-width="12"/>`,
@@ -847,8 +877,8 @@ const FLG=(()=>{
   fi:()=>nord('#fff','#003580',10),
   is:()=>nord('#02529c','#fff',14,'#dc1e35',7),
   gr:()=>{let s='';for(let i=0;i<9;i++)s+=`<rect y="${(i*60/9).toFixed(2)}" width="90" height="${(60/9+.3).toFixed(2)}" fill="${i%2?'#fff':'#0d5eaf'}"/>`;return s+`<rect width="33.4" height="33.4" fill="#0d5eaf"/><path d="M16.7 0V33.4M0 16.7H33.4" stroke="#fff" stroke-width="6.7"/>`;},
-  ar:()=>H(['#74acdf','#fff','#74acdf'])+S(45,30,6.5,'#f6b40e',0,16,.7),
-  mx:()=>V(['#006847','#fff','#ce1126'])+`<circle cx="45" cy="30" r="7.5" fill="#a7783f" opacity=".9"/><circle cx="45" cy="30" r="5" fill="#5aa05a"/>`,
+  ar:()=>H(['#74acdf','#fff','#74acdf'])+Array.from({length:16},(_,i)=>{const a=i*Math.PI/8,b=a+Math.PI/16,c=a-Math.PI/16,r=9.3,r2=6.1;return i%2?`<path d="M${(45+r2*Math.cos(a)).toFixed(1)} ${(30+r2*Math.sin(a)).toFixed(1)}Q${(45+(r+r2)/2*Math.cos(b)).toFixed(1)} ${(30+(r+r2)/2*Math.sin(b)).toFixed(1)} ${(45+r*Math.cos(a)).toFixed(1)} ${(30+r*Math.sin(a)).toFixed(1)}" stroke="#f6b40e" stroke-width=".9" fill="none"/>`:`<path d="M${(45+r2*Math.cos(c)).toFixed(1)} ${(30+r2*Math.sin(c)).toFixed(1)}L${(45+r*Math.cos(a)).toFixed(1)} ${(30+r*Math.sin(a)).toFixed(1)}L${(45+r2*Math.cos(b)).toFixed(1)} ${(30+r2*Math.sin(b)).toFixed(1)}Z" fill="#f6b40e"/>`;}).join('')+`<circle cx="45" cy="30" r="4.6" fill="#f6b40e" stroke="#85340a" stroke-width=".4"/><circle cx="43.4" cy="29" r=".5" fill="#85340a"/><circle cx="46.6" cy="29" r=".5" fill="#85340a"/><path d="M44.4 31.2Q45 32 45.7 31.2" stroke="#85340a" stroke-width=".5" fill="none"/><path d="M45 29.4V30.6" stroke="#85340a" stroke-width=".4"/>`,
+  mx:()=>V(['#006847','#fff','#ce1126'])+`<path d="M37.5 38C33.5 32 34.5 25 39.5 21.5" stroke="#3b8a3b" stroke-width="2" fill="none" stroke-linecap="round"/><path d="M52.5 38C56.5 32 55.5 25 50.5 21.5" stroke="#3b8a3b" stroke-width="2" fill="none" stroke-linecap="round"/><path d="M38.5 39.5Q45 43 51.5 39.5" stroke="#ce1126" stroke-width="1.6" fill="none"/><path d="M39 41Q45 44.5 51 41" stroke="#006847" stroke-width="1" fill="none"/><ellipse cx="45" cy="35.8" rx="5" ry="2.1" fill="#5aa05a"/><ellipse cx="42" cy="35" rx="2" ry="1.3" fill="#3f8a45"/><ellipse cx="48" cy="35" rx="2" ry="1.3" fill="#3f8a45"/><path d="M45.4 19.5Q47.5 21.5 47 24.5L45.4 24Z" fill="#a7783f"/><ellipse cx="45.6" cy="29" rx="3.1" ry="5" fill="#a7783f"/><path d="M43.4 27Q38 22.5 36.8 28.5Q39.5 27.8 42 31Z" fill="#8c5e2f"/><path d="M47.8 27Q53.6 25 54.4 31Q51 29.8 48.5 32Z" fill="#8c5e2f"/><circle cx="44.7" cy="23" r="2" fill="#a7783f"/><path d="M42.8 22.8L41 24L43.2 24.4Z" fill="#f1bf00"/><path d="M41.2 24.2Q39 27.5 41.2 29" stroke="#8b0000" stroke-width=".9" fill="none"/><path d="M44 34L43 37M46 34L47 37" stroke="#7b4f26" stroke-width="1.1"/>`,
   tr:()=>bg('#e30a17')+`<circle cx="33" cy="30" r="15" fill="#fff"/><circle cx="37.5" cy="30" r="12" fill="#e30a17"/>`+S(55,30,7.5,'#fff',90),
   th:()=>H(['#a51931','#f4f5f8','#2d2a4a','#f4f5f8','#a51931'],[1,1,2,1,1]),
   vn:()=>bg('#da251d')+S(45,30,18,'#ffff00'),
@@ -870,7 +900,8 @@ const FLG=(()=>{
   bd:()=>bg('#006a4e')+`<circle cx="40" cy="30" r="18" fill="#f42a41"/>`,
   ng:()=>V(['#008751','#fff','#008751'])
  };
- return id=>`<svg viewBox="0 0 90 60" class="flag" xmlns="http://www.w3.org/2000/svg">${D[id]()}<rect x="${id==='ch'?15.5:.5}" y=".5" width="${id==='ch'?59:89}" height="59" fill="none" stroke="#0003"/></svg>`;
+ const FR={ch:[15.5,.5,59,59],gb:[.5,8,89,44],au:[.5,8,89,44]};
+ return id=>{const f=FR[id]||[.5,.5,89,59];return `<svg viewBox="0 0 90 60" class="flag" xmlns="http://www.w3.org/2000/svg">${D[id]()}<rect x="${f[0]}" y="${f[1]}" width="${f[2]}" height="${f[3]}" fill="none" stroke="#0003"/></svg>`;};
 })();
 GEN.flag=(d,n)=>{const pool=FLAGS.filter(f=>f[3]<=d);const f=pick(pool);let dist=[];
  if(d===3){const sim=[...new Set(FSIM.filter(g=>g.includes(f[0])).flat())].filter(x=>x!==f[0]);dist=shuffle(sim).map(id=>FLAGS.find(z=>z[0]===id)).filter(Boolean).slice(0,n-1);}
